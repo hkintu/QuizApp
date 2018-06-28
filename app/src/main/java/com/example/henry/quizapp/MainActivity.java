@@ -2,11 +2,13 @@ package com.example.henry.quizapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -16,25 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    TextView marksView;
-    TextView questionNumber;
-    String answer1 = "Router";
-    String answer2 = "router";
-    String answerForQuestionThree = "16";
-    CheckBox answerOne;
-    CheckBox answerTwo;
-    CheckBox answerThree;
-    CheckBox answerFour;
-    RadioButton answerRadio4;
+
+    private TextView questionNumber;
     float submittedMarks;
     float radioMarks;
     int editText1Answer;
     int editText2Answer;
-    boolean answerOneIsAnswer;
-    boolean answerTwoIsAnswer;
-    boolean answerThreeIsAnswer;
-    boolean answerFourIsAnswer;
-    boolean selectedButton4;
+
 
     //method to handle the onClick menu item clicked which include the reset and exit menu items
     @Override
@@ -119,21 +109,22 @@ public class MainActivity extends AppCompatActivity {
     public void submitMarks(View v) {
 
         // objects are created for the checkBoxes view
-        answerOne = (CheckBox) findViewById(R.id.answer_1);
-        answerOneIsAnswer = answerOne.isChecked();
 
-        answerTwo = (CheckBox) findViewById(R.id.answer_2);
-        answerTwoIsAnswer = answerTwo.isChecked();
+        CheckBox answerOne = (CheckBox) findViewById(R.id.answer_1);
+        boolean answerOneIsAnswer = answerOne.isChecked();
 
-        answerThree = (CheckBox) findViewById(R.id.answer_3);
-        answerThreeIsAnswer = answerThree.isChecked();
+        CheckBox answerTwo = (CheckBox) findViewById(R.id.answer_2);
+        boolean answerTwoIsAnswer = answerTwo.isChecked();
 
-        answerFour = (CheckBox) findViewById(R.id.answer_4);
-        answerFourIsAnswer = answerFour.isChecked();
+        CheckBox answerThree = (CheckBox) findViewById(R.id.answer_3);
+        boolean answerThreeIsAnswer = answerThree.isChecked();
+
+        CheckBox answerFour = (CheckBox) findViewById(R.id.answer_4);
+        boolean answerFourIsAnswer = answerFour.isChecked();
 
         // an object created for the radioButton view
-        answerRadio4 = (RadioButton) findViewById(R.id.answer_radio4);
-        selectedButton4 = answerRadio4.isChecked();
+        RadioButton answerRadio4 = (RadioButton) findViewById(R.id.answer_radio4);
+        boolean selectedButton4 = answerRadio4.isChecked();
 
         // submissions for all methods in the application
         submittedMarks = calculateMarks(answerOneIsAnswer, answerTwoIsAnswer, answerThreeIsAnswer, answerFourIsAnswer);
@@ -192,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.question_three_answer_editText);
 
         String text1 = editText.getText().toString();
-
+        String answerForQuestionThree = "16";
         int answer = 0;
         if (text1.equals(answerForQuestionThree)) {
             answer += 25;
@@ -205,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.question_four_answer_editText);
 
         String text2 = editText.getText().toString();
-
+        String answer1 = "Router";
+        String answer2 = "router";
         int answer = 0;
         if (text2.equals(answer1) || text2.equals(answer2)) {
             answer += 25;
@@ -215,10 +207,34 @@ public class MainActivity extends AppCompatActivity {
 
     // method for displaying marks scored after the submit button is pressed
     public void displayMarks(float v) {
-        marksView = (TextView) findViewById(R.id.marks_textView);
+        TextView marksView = (TextView) findViewById(R.id.marks_textView);
         marksView.setText(String.valueOf(v) + "%");
 
     }
 
-
+    /**
+     * Called to process touch screen events.  You can override this to
+     * intercept all touch screen events before they are dispatched to the
+     * window.  Be sure to call this implementation for touch screen events
+     * that should be handled normally.
+     *
+     * @param ev The touch screen event.
+     * @return boolean Return true if this event was consumed.
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if(ev.getAction() == MotionEvent.ACTION_DOWN){
+            View v = getCurrentFocus();
+            if (v instanceof EditText){
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if(!outRect.contains((int)ev.getRawX(), (int)ev.getRawY())){
+                   v.clearFocus();
+                   InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                   imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 }

@@ -22,7 +22,7 @@
             android:paddingRight="14dp"
             android:text="0%"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="36sp"
+            android:textAppearance="?android:textAppearanceLarge"
             android:textStyle="bold" />
 
         <TextView
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textStyle="bold" />
 
             <CheckBox
@@ -61,28 +61,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="When they receive a special token"
-                android:textSize="13dp" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <CheckBox
                 android:id="@+id/answer_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="When there is a carrier"
-                android:textSize="13dp" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <CheckBox
                 android:id="@+id/answer_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="When they detect no other devices are sending"
-                android:textSize="13dp" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <CheckBox
                 android:id="@+id/answer_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="When the medium is idle"
-                android:textSize="13dp" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
 
         </LinearLayout>
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -111,28 +111,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Transport"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:textAppearanceSmall"/>
 
                 <RadioButton
                     android:id="@+id/answer_radio2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Network"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:textAppearanceSmall" />
 
                 <RadioButton
                     android:id="@+id/answer_radio3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Presentation"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:textAppearanceSmall" />
 
                 <RadioButton
                     android:id="@+id/answer_radio4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Application"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:textAppearanceSmall"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:textColor="@android:color/black"
-                android:textSize="15dp"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:textStyle="bold" />
 
             <EditText
@@ -172,7 +172,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <TextView
@@ -183,7 +183,7 @@
                     android:layout_weight="1"
                     android:fontFamily="sans-serif"
                     android:textColor="@android:color/black"
-                    android:textSize="15dp"
+                    android:textAppearance="?android:textAppearanceMedium"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -191,7 +191,8 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    android:src="@drawable/router" />
+                    android:src="@drawable/router"
+                    android:scaleType="centerCrop"/>
             </LinearLayout>
 
             <EditText
