@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    private TextView marksView;
     private TextView questionNumber;
     float submittedMarks;
     float radioMarks;
@@ -140,8 +140,9 @@ public class MainActivity extends AppCompatActivity {
 
         //the method is used to scroll back to the top for the student to see
         //their grade
+        String toastedMarks = String.valueOf(v);
         scrollView.scrollTo(0, 0);
-        Toast.makeText(getApplicationContext(), "The Quiz is Complete thank you", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "The Quiz Score is: "+getText(), Toast.LENGTH_LONG).show();
 
         //method for hiding keyboard when the submit button is clicked
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -207,9 +208,14 @@ public class MainActivity extends AppCompatActivity {
 
     // method for displaying marks scored after the submit button is pressed
     public void displayMarks(float v) {
-        TextView marksView = (TextView) findViewById(R.id.marks_textView);
+        marksView = (TextView) findViewById(R.id.marks_textView);
         marksView.setText(String.valueOf(v) + "%");
 
+    }
+    public String getText() {
+        marksView=(TextView)findViewById(R.id.marks_textView);
+        String text = marksView.getText().toString();
+        return text;
     }
 
     /**
